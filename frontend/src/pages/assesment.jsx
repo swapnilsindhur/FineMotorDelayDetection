@@ -5,6 +5,7 @@ import { Canvas } from "../components/canvas";
 import { ClearCanvasButton } from "../components/clearCanvasButton";
 import { CanvasSave } from "../components/canvasSave";
 import { useCanvas } from "../components/canvascontext";
+import Result from "../components/result";
 
 function Assesment() {
   const { file } = useCanvas()
@@ -20,7 +21,7 @@ function Assesment() {
 
     try {
       const result = await axios.post(
-        "http://localhost:3000/upload-image",
+        "http://localhost:3000/upload-image/circle",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -41,7 +42,7 @@ function Assesment() {
 
     try {
       const result = await axios.post(
-        "http://localhost:3000/upload-image",
+        "http://localhost:3000/upload-image/triangle",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -62,7 +63,7 @@ function Assesment() {
 
     try {
       const result = await axios.post(
-        "http://localhost:3000/upload-image",
+        "http://localhost:3000/upload-image/square",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -256,6 +257,7 @@ function Assesment() {
           </div>
 
           <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+            <Modal/>
             <a
               href="#"
               title=""
@@ -416,6 +418,7 @@ function Assesment() {
           </div>
 
           <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+            <Modal/>
             <a
               href="#"
               title=""
@@ -575,6 +578,7 @@ function Assesment() {
           </div>
 
           <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+            <Modal/>
             <a
               href="#"
               title=""
@@ -627,7 +631,7 @@ function Assesment() {
         </div>
       </div>
     </div>
-    <Modal c1={content1?content1:{msg1:"NA",msg2:"NA"}} c2={content2?content2:{msg1:"NA",msg2:"NA"}} c3={content3?content3:{msg1:"NA",msg2:"NA"}} ></Modal>
+    <Result c1={content1?content1:{msg1:"NA",msg2:"NA"}} c2={content2?content2:{msg1:"NA",msg2:"NA"}} c3={content3?content3:{msg1:"NA",msg2:"NA"}} />
   </section>
   {/* <Canvas></Canvas>
   <ClearCanvasButton/>

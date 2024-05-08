@@ -40,9 +40,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.post("/upload-image", upload.single("image"), async (req, res) => {
-//   console.log(req.body);
-  console.log("Inside post req");
+app.post("/upload-image/circle", upload.single("image"), async (req, res) => {
+  console.log("Inside post req of circle");
   const imageName = req.file.filename;
   try {
     const image = await Images.create({ image: imageName });
@@ -51,7 +50,7 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
         scriptPath : "/media/swapnil/New Volume/final/backend",
         args:[`./uploads/${image.image}`]
     }
-    const message = await PythonShell.run('mach_learn.py', options)
+    const message = await PythonShell.run('circle_ml.py', options)
     // console.log(message[2]);
     // console.log(message[3]);
     
@@ -61,6 +60,51 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
     res.json({ status: error });
   }
 });
+
+
+app.post("/upload-image/square", upload.single("image"), async (req, res) => {
+  console.log("Inside post req of square");
+  const imageName = req.file.filename;
+  try {
+    const image = await Images.create({ image: imageName });
+    // console.log(image.image);
+    let options = {
+        scriptPath : "/media/swapnil/New Volume/final/backend",
+        args:[`./uploads/${image.image}`]
+    }
+    const message = await PythonShell.run('square_ml.py', options)
+    // console.log(message[2]);
+    // console.log(message[3]);
+    
+    res.json({msg1:message[2],msg2:message[3]})
+    
+  } catch (error) {
+    res.json({ status: error });
+  }
+});
+
+
+app.post("/upload-image/triangle", upload.single("image"), async (req, res) => {
+  console.log("Inside post req of triangle");
+  const imageName = req.file.filename;
+  try {
+    const image = await Images.create({ image: imageName });
+    // console.log(image.image);
+    let options = {
+        scriptPath : "/media/swapnil/New Volume/final/backend",
+        args:[`./uploads/${image.image}`]
+    }
+    const message = await PythonShell.run('triangle_ml.py', options)
+    // console.log(message[2]);
+    // console.log(message[3]);
+    
+    res.json({msg1:message[2],msg2:message[3]})
+    
+  } catch (error) {
+    res.json({ status: error });
+  }
+});
+
 
 
 app.listen(3000, () => {
